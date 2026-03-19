@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ugadi Wishes 2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fff7e6 0%, #ffe4b8 50%, #ffd699 100%);
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            overflow-x: hidden;
+        }
+
+        /* Floating decorations - hidden on small screens */
+        .decoration {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+            font-size: 1.5rem;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(10deg); }
+        }
+
+        @media (max-width: 480px) {
+            .decoration {
+                display: none;
+            }
+        }
+
+        /* Screens */
+        .screen {
+            display: none;
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            padding: 20px;
+            padding-top: env(safe-area-inset-top, 20px);
+            padding-bottom: env(safe-area-inset-bottom, 20px);
+            position: relative;
+            z-index: 1;
+        }
+
+        .screen.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Welcome Screen */
+        .welcome-title {
+            font-size: clamp(1.5rem, 6vw, 2.5rem);
+            color: #d35400;
+            text-align: center;
+            margin-bottom: 8px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .welcome-subtitle {
+            font-size: clamp(1rem, 4vw, 1.2rem);
+            color: #666;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .rangoli {
+            font-size: clamp(3rem, 12vw, 4.5rem);
+            margin-bottom: 25px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .name-input {
+            padding: 14px 24px;
+            font-size: 1.1rem;
+            font-family: 'Poppins', sans-serif;
+            border: 3px solid #e67e22;
+            border-radius: 50px;
+            outline: none;
+            text-align: center;
+            width: min(280px, 85vw);
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .name-input:focus {
+            border-color: #d35400;
+            box-shadow: 0 0 20px rgba(230, 126, 34, 0.3);
+        }
+
+        .btn {
+            padding: 14px 35px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+            touch-action: manipulation;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            color: white;
+            box-shadow: 0 4px 15px rgba(211, 84, 0, 0.3);
+        }
+
+        .btn-primary:hover, .btn-primary:active {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(211, 84, 0, 0.4);
+        }
+
+        .btn-primary:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Wheel Screen */
+        .wheel-title {
+            font-size: clamp(1.3rem, 5vw, 1.8rem);
+            color: #d35400;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .wheel-greeting {
+            font-size: clamp(0.85rem, 3.5vw, 1rem);
+            color: #666;
+            text-align: center;
+            margin-bottom: 15px;
+            padding: 0 10px;
+        }
+
+        .wheel-container {
+            position: relative;
+            margin: 10px 0 20px;
+        }
+
+        .wheel-canvas {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 8px 25px rgba(0,0,0,0.2));
+        }
+
+        .wheel-pointer {
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            font-size: 2.5rem;
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.3));
+        }
+
+        .wheel-center-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            border: 4px solid white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            transition: all 0.3s;
+            touch-action: manipulation;
+        }
+
+        .wheel-center-btn:hover, .wheel-center-btn:active {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .wheel-center-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .wheel-center-btn.spinning {
+            animation: spinPulse 0.3s ease infinite;
+        }
+
+        @keyframes spinPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        .spin-instruction {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 10px;
+        }
+
+        .blessing-result {
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.15);
+            max-width: min(350px, 90vw);
+            display: none;
+        }
+
+        .blessing-result.show {
+            display: block;
+            animation: bounceIn 0.5s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            70% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .blessing-emoji {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+
+        .blessing-title {
+            font-size: 1.6rem;
+            color: #d35400;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .blessing-kannada {
+            font-size: 1.3rem;
+            color: #666;
+        }
+
+        .blessing-message {
+            margin-top: 15px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* ===== PACHADI SCREEN - VILLAGE THEME ===== */
+        #pachadiScreen {
+            padding: 0;
+            background: linear-gradient(180deg,
+                #87CEEB 0%,      /* Sky blue */
+                #98D8AA 15%,     /* Light green trees */
+                #4A7C23 25%,     /* Dark green forest */
+                #5D4037 40%,     /* Brown hut/mud wall */
+                #8B7355 60%,     /* Lighter mud */
+                #654321 100%    /* Ground */
+            );
+            position: relative;
+            overflow: hidden;
+        }
+
+        #pachadiScreen.active {
+            justify-content: flex-start;
+            padding-top: 10px;
+        }
+
+        /* Decorative leaf garland at top */
+        .leaf-garland {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            z-index: 5;
+            overflow: hidden;
+        }
+
+        .garland-string {
+            display: flex;
+            gap: 5px;
+            padding: 5px 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .garland-leaf {
+            font-size: 1.2rem;
+            animation: sway 2s ease-in-out infinite;
+        }
+
+        .garland-leaf:nth-child(odd) { animation-delay: 0.5s; }
+        .garland-leaf:nth-child(3n) { font-size: 1rem; }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        /* Side decorations */
+        .side-decor {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.8;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .side-decor.left { left: 5px; }
+        .side-decor.right { right: 5px; }
+
+        /* Title area */
+        .pachadi-title-village {
+            font-size: clamp(1.2rem, 4.5vw, 1.6rem);
+            color: #fff;
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+
+        .pachadi-subtitle-village {
+            font-size: clamp(0.75rem, 3vw, 0.9rem);
+            color: rgba(255,255,255,0.9);
+            text-align: center;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+
+        /* Main cooking area */
+        .cooking-area {
+            position: relative;
+            width: 100%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 10px;
+        }
+
+        /* Mud Stove (Chulha) */
+        .stove {
+            position: relative;
+            width: min(280px, 75vw);
+            height: min(180px, 40vw);
+            margin-bottom: 10px;
+        }
+
+        .stove-body {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 70%;
+            background: linear-gradient(180deg, #8B6914 0%, #6B4423 50%, #4A3520 100%);
+            border-radius: 20px 20px 10px 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        .stove-body::before {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 30px;
+            background: linear-gradient(180deg, #2D1810 0%, #1a0f0a 100%);
+            border-radius: 5px 5px 10px 10px;
+            box-shadow: inset 0 -5px 10px rgba(255,100,0,0.5);
+        }
+
+        /* Fire animation */
+        .fire-container {
+            position: absolute;
+            bottom: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 50px;
+            z-index: 2;
+        }
+
+        .fire {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(ellipse at bottom, #ff6600 0%, #ff3300 40%, transparent 70%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: burn 0.5s ease-in-out infinite alternate;
+        }
+
+        .fire::before {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 25px;
+            height: 30px;
+            background: radial-gradient(ellipse at bottom, #ffcc00 0%, #ff9900 50%, transparent 70%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: burn 0.3s ease-in-out infinite alternate;
+        }
+
+        .fire::after {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 20px;
+            background: radial-gradient(ellipse at bottom, #fff 0%, #ffff00 50%, transparent 70%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: burn 0.2s ease-in-out infinite alternate;
+        }
+
+        @keyframes burn {
+            0% { transform: translateX(-50%) scaleY(1) scaleX(1); }
+            100% { transform: translateX(-50%) scaleY(1.1) scaleX(0.9); }
+        }
+
+        /* Big Clay Pot (Handi) */
+        .big-pot {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(140px, 38vw);
+            height: min(110px, 28vw);
+            z-index: 3;
+        }
+
+        .big-pot-body {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .big-pot-rim {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70%;
+            height: 15%;
+            background: linear-gradient(180deg, #C47A4A 0%, #A65E3A 100%);
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+        }
+
+        .big-pot-main {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 90%;
+            background: linear-gradient(180deg, #B8734A 0%, #9E5C35 30%, #8B4726 60%, #723A1F 100%);
+            border-radius: 50% 50% 45% 45% / 30% 30% 70% 70%;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4), inset 0 -10px 20px rgba(0,0,0,0.3);
+        }
+
+        .big-pot-inner {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 55%;
+            height: 25%;
+            background: linear-gradient(180deg, #4A3020 0%, #3A2515 100%);
+            border-radius: 50%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 2px;
+            padding: 5px;
+            overflow: hidden;
+        }
+
+        .pot-ingredient {
+            font-size: clamp(0.9rem, 3vw, 1.2rem);
+            animation: potDrop 0.5s ease;
+        }
+
+        @keyframes potDrop {
+            from { transform: translateY(-30px) scale(1.5); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        /* Ground area with small pots */
+        .ground-area {
+            width: 100%;
+            padding: 15px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .small-pots-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            max-width: min(360px, 95vw);
+        }
+
+        /* Small Clay Pots */
+        .small-pot {
+            width: min(90px, 22vw);
+            height: min(100px, 25vw);
+            position: relative;
+            cursor: grab;
+            transition: transform 0.3s;
+            touch-action: none;
+        }
+
+        .small-pot:active {
+            cursor: grabbing;
+        }
+
+        .small-pot:hover {
+            transform: scale(1.05);
+        }
+
+        .small-pot.dragging {
+            opacity: 0.7;
+            transform: scale(1.1);
+            z-index: 100;
+        }
+
+        .small-pot.added {
+            opacity: 0.3;
+            pointer-events: none;
+            transform: scale(0.9);
+        }
+
+        .small-pot-body {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85%;
+            height: 70%;
+            background: linear-gradient(180deg, #C8885A 0%, #A66A3E 40%, #8B5232 100%);
+            border-radius: 45% 45% 40% 40% / 30% 30% 70% 70%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .small-pot-rim {
+            position: absolute;
+            bottom: 65%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 12%;
+            background: linear-gradient(180deg, #D9976B 0%, #B87A4F 100%);
+            border-radius: 8px 8px 0 0;
+        }
+
+        .small-pot-content {
+            position: absolute;
+            bottom: 68%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: clamp(1.3rem, 5vw, 1.8rem);
+            z-index: 2;
+        }
+
+        .small-pot-label {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: clamp(0.55rem, 2vw, 0.7rem);
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            white-space: nowrap;
+            font-weight: 600;
+        }
+
+        /* Progress bar */
+        .progress-village {
+            width: min(280px, 80vw);
+            height: 12px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            margin-top: 15px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .progress-fill-village {
+            height: 100%;
+            background: linear-gradient(90deg, #f39c12, #e67e22, #d35400);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(243, 156, 18, 0.5);
+        }
+
+        /* Ingredient message overlay */
+        .ingredient-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(74, 60, 50, 0.95);
+            color: #fff;
+            padding: 20px 30px;
+            border-radius: 15px;
+            text-align: center;
+            z-index: 200;
+            max-width: 85vw;
+            border: 3px solid #C8885A;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: msgPop 2s ease forwards;
+        }
+
+        @keyframes msgPop {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            15% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            85% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+        }
+
+        /* Flying ingredient animation */
+        .flying-ingredient {
+            position: fixed;
+            font-size: 2rem;
+            z-index: 150;
+            pointer-events: none;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* Final Screen */
+        .final-container {
+            text-align: center;
+            max-width: min(400px, 90vw);
+            padding: 0 10px;
+        }
+
+        .final-emoji {
+            font-size: clamp(3.5rem, 12vw, 5rem);
+            margin-bottom: 15px;
+            animation: celebrate 1s ease infinite;
+        }
+
+        @keyframes celebrate {
+            0%, 100% { transform: rotate(-5deg) scale(1); }
+            50% { transform: rotate(5deg) scale(1.1); }
+        }
+
+        .final-kannada {
+            font-size: clamp(1.3rem, 5vw, 2rem);
+            color: #d35400;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .final-english {
+            font-size: clamp(1.1rem, 4vw, 1.5rem);
+            color: #e67e22;
+            margin-bottom: 15px;
+        }
+
+        .final-name {
+            font-size: clamp(1.2rem, 4.5vw, 1.8rem);
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        .final-blessing {
+            background: linear-gradient(135deg, #fff, #fff7e6);
+            padding: 18px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .final-message {
+            color: #555;
+            line-height: 1.6;
+            font-size: clamp(0.85rem, 3.5vw, 1rem);
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .btn-share {
+            padding: 12px 20px;
+            font-size: 0.9rem;
+            font-family: 'Poppins', sans-serif;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            touch-action: manipulation;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .btn-copy {
+            background: #333;
+            color: white;
+        }
+
+        .btn-share:hover, .btn-share:active {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-wish-back {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            margin-top: 20px;
+            padding: 14px 25px;
+            font-size: 0.95rem;
+            border-radius: 50px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            width: min(320px, 90vw);
+        }
+
+        .btn-wish-back:hover, .btn-wish-back:active {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+        }
+
+        .btn-restart {
+            background: transparent;
+            border: 2px solid #e67e22;
+            color: #e67e22;
+            margin-top: 10px;
+            padding: 12px 30px;
+        }
+
+        .btn-restart:hover, .btn-restart:active {
+            background: #e67e22;
+            color: white;
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            top: -20px;
+            animation: confettiFall 3s linear forwards;
+        }
+
+        @keyframes confettiFall {
+            to {
+                top: 100vh;
+                transform: rotate(720deg);
+            }
+        }
+
+        /* Sound toggle */
+        .sound-toggle {
+            position: fixed;
+            top: max(15px, env(safe-area-inset-top, 15px));
+            right: 15px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.3s;
+            touch-action: manipulation;
+        }
+
+        .sound-toggle:hover, .sound-toggle:active {
+            transform: scale(1.1);
+        }
+
+        /* Drop zone highlight */
+        .big-pot.drop-active .big-pot-inner {
+            box-shadow: 0 0 20px rgba(255, 200, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <!-- Sound Toggle -->
+    <button class="sound-toggle" id="soundToggle" title="Toggle Sound">🔊</button>
+
+    <!-- Floating Decorations -->
+    <div class="decoration" style="top: 10%; left: 5%;">🥭</div>
+    <div class="decoration" style="top: 20%; right: 10%; animation-delay: 1s;">🌸</div>
+    <div class="decoration" style="top: 60%; left: 8%; animation-delay: 2s;">🌿</div>
+    <div class="decoration" style="top: 70%; right: 5%; animation-delay: 0.5s;">🪷</div>
+    <div class="decoration" style="bottom: 15%; left: 15%; animation-delay: 1.5s;">🥭</div>
+
+    <!-- Screen 1: Welcome -->
+    <div class="screen active" id="welcomeScreen">
+        <div class="rangoli">🪷</div>
+        <h1 class="welcome-title">Welcome to Ugadi!</h1>
+        <p class="welcome-subtitle">ಯುಗಾದಿಗೆ ಸ್ವಾಗತ!</p>
+        <input type="text" class="name-input" id="nameInput" placeholder="Enter your name" maxlength="30" autocomplete="off">
+        <button class="btn btn-primary" id="startBtn" disabled>Begin Your Journey</button>
+    </div>
+
+    <!-- Screen 2: Spin the Wheel -->
+    <div class="screen" id="wheelScreen">
+        <h2 class="wheel-title">Spin for Your Blessing!</h2>
+        <p class="wheel-greeting" id="wheelGreeting">Let's see what this year holds for you</p>
+
+        <div class="wheel-container" id="wheelContainer">
+            <div class="wheel-pointer">▼</div>
+            <canvas class="wheel-canvas" id="wheelCanvas" width="300" height="300"></canvas>
+            <button class="wheel-center-btn" id="spinBtn" title="Spin!">☀️</button>
+        </div>
+
+        <p class="spin-instruction" id="spinInstruction">Tap the center to spin!</p>
+
+        <div class="blessing-result" id="blessingResult">
+            <div class="blessing-emoji" id="blessingEmoji"></div>
+            <div class="blessing-title" id="blessingTitle"></div>
+            <div class="blessing-kannada" id="blessingKannada"></div>
+            <p class="blessing-message">But life is a beautiful mix of all flavors...</p>
+            <button class="btn btn-primary" id="continueBtn">Mix the Pachadi 🥣</button>
+        </div>
+    </div>
+
+    <!-- Screen 3: Pachadi Mixer - Village Theme -->
+    <div class="screen" id="pachadiScreen">
+        <!-- Decorative leaf garland -->
+        <div class="leaf-garland">
+            <div class="garland-string">
+                <span class="garland-leaf">🥭</span>
+                <span class="garland-leaf">🌿</span>
+                <span class="garland-leaf">🌸</span>
+                <span class="garland-leaf">🥭</span>
+                <span class="garland-leaf">🌺</span>
+                <span class="garland-leaf">🌿</span>
+                <span class="garland-leaf">🥭</span>
+                <span class="garland-leaf">🌸</span>
+                <span class="garland-leaf">🌿</span>
+                <span class="garland-leaf">🥭</span>
+                <span class="garland-leaf">🌺</span>
+                <span class="garland-leaf">🌿</span>
+            </div>
+        </div>
+
+        <!-- Side decorations -->
+        <div class="side-decor left" style="top: 20%;">🌿</div>
+        <div class="side-decor right" style="top: 25%; animation-delay: 1s;">🥭</div>
+        <div class="side-decor left" style="top: 45%; animation-delay: 0.5s;">🌸</div>
+        <div class="side-decor right" style="top: 50%; animation-delay: 1.5s;">🌿</div>
+
+        <h2 class="pachadi-title-village">Mix Your Ugadi Pachadi</h2>
+        <p class="pachadi-subtitle-village">Drag ingredients from small pots to the big pot</p>
+
+        <div class="cooking-area">
+            <!-- Stove with big pot -->
+            <div class="stove">
+                <div class="stove-body"></div>
+                <div class="fire-container">
+                    <div class="fire"></div>
+                </div>
+                <div class="big-pot" id="bigPot">
+                    <div class="big-pot-body">
+                        <div class="big-pot-rim"></div>
+                        <div class="big-pot-main"></div>
+                        <div class="big-pot-inner" id="potInner"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ground with small pots -->
+            <div class="ground-area">
+                <div class="small-pots-container" id="smallPots"></div>
+                <div class="progress-village">
+                    <div class="progress-fill-village" id="progressFill" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen 4: Final Wish -->
+    <div class="screen" id="finalScreen">
+        <div class="final-container">
+            <div class="final-emoji">🎊</div>
+            <div class="final-kannada">ಯುಗಾದಿ ಹಬ್ಬದ ಶುಭಾಶಯಗಳು!</div>
+            <div class="final-english">Happy Ugadi 2025!</div>
+            <div class="final-name" id="finalName"></div>
+
+            <div class="final-blessing">
+                <p class="final-message" id="finalMessage"></p>
+            </div>
+
+            <div class="share-buttons">
+                <button class="btn-share btn-whatsapp" id="shareWhatsapp">
+                    📱 WhatsApp
+                </button>
+                <button class="btn-share btn-copy" id="copyLink">
+                    📋 Copy Wish
+                </button>
+            </div>
+
+            <button class="btn btn-wish-back" id="wishBackBtn">
+                🙏 Wish back Prashanth on WhatsApp
+            </button>
+
+            <button class="btn btn-restart" id="restartBtn">🔄 Start Again</button>
+        </div>
+    </div>
+
+    <!-- Confetti Container -->
+    <div class="confetti" id="confetti"></div>
+
+    <script>
+        // ===== DATA =====
+        const blessings = [
+            { emoji: '🌟', title: 'Prosperity', kannada: 'ಸಮೃದ್ಧಿ', color: '#f1c40f' },
+            { emoji: '💪', title: 'Health', kannada: 'ಆರೋಗ್ಯ', color: '#e74c3c' },
+            { emoji: '📚', title: 'Wisdom', kannada: 'ಜ್ಞಾನ', color: '#3498db' },
+            { emoji: '❤️', title: 'Love', kannada: 'ಪ್ರೀತಿ', color: '#e91e63' },
+            { emoji: '🎯', title: 'Success', kannada: 'ಯಶಸ್ಸು', color: '#2ecc71' },
+            { emoji: '☮️', title: 'Peace', kannada: 'ಶಾಂತಿ', color: '#9b59b6' }
+        ];
+
+        const ingredients = [
+            { emoji: '🍯', name: 'Jaggery', kannada: 'ಬೆಲ್ಲ', message: 'Sweetness of joy in every moment', taste: 'Sweet' },
+            { emoji: '🌿', name: 'Neem', kannada: 'ಬೇವು', message: 'Bitterness that builds your strength', taste: 'Bitter' },
+            { emoji: '🫚', name: 'Tamarind', kannada: 'ಹುಣಸೆ', message: 'Sour moments that teach patience', taste: 'Sour' },
+            { emoji: '🥭', name: 'Raw Mango', kannada: 'ಮಾವಿನಕಾಯಿ', message: 'Tanginess of pleasant surprises', taste: 'Tangy' },
+            { emoji: '🧂', name: 'Salt', kannada: 'ಉಪ್ಪು', message: 'The essential essence of life', taste: 'Salty' },
+            { emoji: '🌶️', name: 'Pepper', kannada: 'ಮೆಣಸು', message: 'Spice of exciting challenges', taste: 'Spicy' }
+        ];
+
+        // ===== STATE =====
+        let userName = '';
+        let userBlessing = null;
+        let addedIngredients = [];
+        let soundEnabled = true;
+        let isSpinning = false;
+        let currentRotation = 0;
+        let draggedElement = null;
+        let draggedIndex = null;
+
+        // ===== AUDIO =====
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new AudioContext();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function playSound(type) {
+            if (!soundEnabled || !audioCtx) return;
+
+            try {
+                const oscillator = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+
+                switch(type) {
+                    case 'click':
+                        oscillator.frequency.value = 800;
+                        oscillator.type = 'sine';
+                        gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                        oscillator.start();
+                        oscillator.stop(audioCtx.currentTime + 0.1);
+                        break;
+                    case 'tick':
+                        oscillator.frequency.value = 600;
+                        oscillator.type = 'square';
+                        gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
+                        oscillator.start();
+                        oscillator.stop(audioCtx.currentTime + 0.05);
+                        break;
+                    case 'win':
+                        [523, 659, 784, 1047].forEach((freq, i) => {
+                            const osc = audioCtx.createOscillator();
+                            const gain = audioCtx.createGain();
+                            osc.connect(gain);
+                            gain.connect(audioCtx.destination);
+                            osc.frequency.value = freq;
+                            osc.type = 'sine';
+                            gain.gain.setValueAtTime(0.25, audioCtx.currentTime + i * 0.12);
+                            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + i * 0.12 + 0.3);
+                            osc.start(audioCtx.currentTime + i * 0.12);
+                            osc.stop(audioCtx.currentTime + i * 0.12 + 0.3);
+                        });
+                        break;
+                    case 'drop':
+                        oscillator.frequency.value = 400;
+                        oscillator.type = 'triangle';
+                        oscillator.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.2);
+                        gainNode.gain.setValueAtTime(0.4, audioCtx.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                        oscillator.start();
+                        oscillator.stop(audioCtx.currentTime + 0.3);
+                        break;
+                    case 'sizzle':
+                        // Sizzle sound for adding to pot
+                        const noise = audioCtx.createBufferSource();
+                        const bufferSize = audioCtx.sampleRate * 0.3;
+                        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                        const data = buffer.getChannelData(0);
+                        for (let i = 0; i < bufferSize; i++) {
+                            data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.3));
+                        }
+                        noise.buffer = buffer;
+                        const noiseGain = audioCtx.createGain();
+                        noiseGain.gain.value = 0.15;
+                        noise.connect(noiseGain);
+                        noiseGain.connect(audioCtx.destination);
+                        noise.start();
+                        break;
+                    case 'celebration':
+                        const notes = [523, 587, 659, 698, 784, 880, 988, 1047];
+                        notes.forEach((freq, i) => {
+                            const osc = audioCtx.createOscillator();
+                            const gain = audioCtx.createGain();
+                            osc.connect(gain);
+                            gain.connect(audioCtx.destination);
+                            osc.frequency.value = freq;
+                            osc.type = 'sine';
+                            gain.gain.setValueAtTime(0.2, audioCtx.currentTime + i * 0.08);
+                            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + i * 0.08 + 0.2);
+                            osc.start(audioCtx.currentTime + i * 0.08);
+                            osc.stop(audioCtx.currentTime + i * 0.08 + 0.2);
+                        });
+                        break;
+                }
+            } catch(e) {
+                // Ignore audio errors
+            }
+        }
+
+        // ===== UTILITIES =====
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        function createConfetti() {
+            const confetti = document.getElementById('confetti');
+            confetti.innerHTML = '';
+            const colors = ['#e67e22', '#f39c12', '#2ecc71', '#e74c3c', '#9b59b6', '#3498db'];
+
+            for (let i = 0; i < 80; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                piece.style.left = Math.random() * 100 + '%';
+                piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.animationDelay = Math.random() * 2 + 's';
+                piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                confetti.appendChild(piece);
+            }
+
+            setTimeout(() => confetti.innerHTML = '', 5000);
+        }
+
+        // ===== WHEEL (Canvas-based) =====
+        function drawWheel(rotation = 0) {
+            const canvas = document.getElementById('wheelCanvas');
+            const ctx = canvas.getContext('2d');
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = Math.min(centerX, centerY) - 5;
+            const segmentAngle = (2 * Math.PI) / blessings.length;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            ctx.rotate(rotation);
+
+            blessings.forEach((blessing, i) => {
+                const startAngle = i * segmentAngle - Math.PI / 2;
+                const endAngle = startAngle + segmentAngle;
+
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.arc(0, 0, radius, startAngle, endAngle);
+                ctx.closePath();
+                ctx.fillStyle = blessing.color;
+                ctx.fill();
+
+                ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                ctx.save();
+                const textAngle = startAngle + segmentAngle / 2;
+                ctx.rotate(textAngle);
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+
+                const textRadius = radius * 0.65;
+
+                ctx.font = '22px Arial';
+                ctx.fillStyle = 'white';
+                ctx.fillText(blessing.emoji, textRadius + 25, 0);
+
+                ctx.font = 'bold 13px Poppins, sans-serif';
+                ctx.fillStyle = 'white';
+                ctx.shadowColor = 'rgba(0,0,0,0.4)';
+                ctx.shadowBlur = 2;
+                ctx.fillText(blessing.title, textRadius - 15, 0);
+
+                ctx.restore();
+            });
+
+            ctx.beginPath();
+            ctx.arc(0, 0, radius, 0, 2 * Math.PI);
+            ctx.strokeStyle = '#d35400';
+            ctx.lineWidth = 4;
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(0, 0, 35, 0, 2 * Math.PI);
+            ctx.fillStyle = '#fff7e6';
+            ctx.fill();
+
+            ctx.restore();
+        }
+
+        function resizeWheel() {
+            const canvas = document.getElementById('wheelCanvas');
+            const maxSize = Math.min(window.innerWidth - 40, 320);
+            canvas.style.width = maxSize + 'px';
+            canvas.style.height = maxSize + 'px';
+            drawWheel(currentRotation);
+        }
+
+        function spinWheel() {
+            if (isSpinning) return;
+
+            initAudio();
+            isSpinning = true;
+
+            const spinBtn = document.getElementById('spinBtn');
+            spinBtn.disabled = true;
+            spinBtn.classList.add('spinning');
+            document.getElementById('spinInstruction').style.display = 'none';
+
+            const resultIndex = Math.floor(Math.random() * blessings.length);
+            userBlessing = blessings[resultIndex];
+
+            const segmentAngle = (2 * Math.PI) / blessings.length;
+            const extraSpins = 5 * 2 * Math.PI;
+            const targetAngle = extraSpins + (2 * Math.PI - resultIndex * segmentAngle - segmentAngle / 2);
+
+            const startTime = performance.now();
+            const duration = 4000;
+            const startRotation = currentRotation;
+
+            let lastSegment = -1;
+
+            function animate(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+
+                currentRotation = startRotation + targetAngle * easeOut;
+                drawWheel(currentRotation);
+
+                const currentSegment = Math.floor((currentRotation % (2 * Math.PI)) / segmentAngle);
+                if (currentSegment !== lastSegment) {
+                    playSound('tick');
+                    lastSegment = currentSegment;
+                }
+
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    spinBtn.classList.remove('spinning');
+                    playSound('win');
+
+                    document.getElementById('blessingEmoji').textContent = userBlessing.emoji;
+                    document.getElementById('blessingTitle').textContent = userBlessing.title;
+                    document.getElementById('blessingKannada').textContent = userBlessing.kannada;
+                    document.getElementById('blessingResult').classList.add('show');
+
+                    isSpinning = false;
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        // ===== PACHADI - VILLAGE THEME =====
+        function createSmallPots() {
+            const container = document.getElementById('smallPots');
+            container.innerHTML = '';
+
+            ingredients.forEach((ing, i) => {
+                const pot = document.createElement('div');
+                pot.className = 'small-pot';
+                pot.dataset.index = i;
+                pot.innerHTML = `
+                    <div class="small-pot-rim"></div>
+                    <div class="small-pot-body"></div>
+                    <div class="small-pot-content">${ing.emoji}</div>
+                    <div class="small-pot-label">${ing.name}</div>
+                `;
+
+                // Touch events
+                pot.addEventListener('touchstart', handleDragStart, { passive: false });
+                pot.addEventListener('touchmove', handleDragMove, { passive: false });
+                pot.addEventListener('touchend', handleDragEnd);
+
+                // Mouse events
+                pot.addEventListener('mousedown', handleDragStart);
+
+                container.appendChild(pot);
+            });
+
+            // Mouse events on document for dragging
+            document.addEventListener('mousemove', handleDragMove);
+            document.addEventListener('mouseup', handleDragEnd);
+        }
+
+        function handleDragStart(e) {
+            const pot = e.currentTarget;
+            const index = parseInt(pot.dataset.index);
+
+            if (addedIngredients.includes(index)) return;
+
+            e.preventDefault();
+            initAudio();
+
+            draggedElement = pot;
+            draggedIndex = index;
+            pot.classList.add('dragging');
+
+            playSound('click');
+        }
+
+        function handleDragMove(e) {
+            if (!draggedElement) return;
+            e.preventDefault();
+
+            const bigPot = document.getElementById('bigPot');
+            const potRect = bigPot.getBoundingClientRect();
+
+            let clientX, clientY;
+            if (e.touches) {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            } else {
+                clientX = e.clientX;
+                clientY = e.clientY;
+            }
+
+            // Check if over big pot
+            if (clientX >= potRect.left && clientX <= potRect.right &&
+                clientY >= potRect.top && clientY <= potRect.bottom) {
+                bigPot.classList.add('drop-active');
+            } else {
+                bigPot.classList.remove('drop-active');
+            }
+        }
+
+        function handleDragEnd(e) {
+            if (!draggedElement) return;
+
+            const bigPot = document.getElementById('bigPot');
+            bigPot.classList.remove('drop-active');
+
+            let clientX, clientY;
+            if (e.changedTouches) {
+                clientX = e.changedTouches[0].clientX;
+                clientY = e.changedTouches[0].clientY;
+            } else {
+                clientX = e.clientX;
+                clientY = e.clientY;
+            }
+
+            const potRect = bigPot.getBoundingClientRect();
+
+            // Check if dropped on big pot
+            if (clientX >= potRect.left && clientX <= potRect.right &&
+                clientY >= potRect.top && clientY <= potRect.bottom) {
+                addIngredientToPot(draggedIndex, draggedElement, clientX, clientY);
+            }
+
+            draggedElement.classList.remove('dragging');
+            draggedElement = null;
+            draggedIndex = null;
+        }
+
+        function addIngredientToPot(index, element, fromX, fromY) {
+            if (addedIngredients.includes(index)) return;
+
+            const ing = ingredients[index];
+            const bigPot = document.getElementById('bigPot');
+            const potInner = document.getElementById('potInner');
+            const potRect = bigPot.getBoundingClientRect();
+
+            // Create flying ingredient animation
+            const flyingIng = document.createElement('div');
+            flyingIng.className = 'flying-ingredient';
+            flyingIng.textContent = ing.emoji;
+            flyingIng.style.left = fromX + 'px';
+            flyingIng.style.top = fromY + 'px';
+            document.body.appendChild(flyingIng);
+
+            // Animate to pot
+            requestAnimationFrame(() => {
+                flyingIng.style.left = (potRect.left + potRect.width / 2) + 'px';
+                flyingIng.style.top = (potRect.top + potRect.height * 0.3) + 'px';
+                flyingIng.style.transform = 'scale(0.5)';
+                flyingIng.style.opacity = '0';
+            });
+
+            setTimeout(() => {
+                flyingIng.remove();
+                playSound('sizzle');
+
+                // Add to pot
+                addedIngredients.push(index);
+                element.classList.add('added');
+
+                const emoji = document.createElement('span');
+                emoji.className = 'pot-ingredient';
+                emoji.textContent = ing.emoji;
+                potInner.appendChild(emoji);
+
+                // Update progress
+                const progress = (addedIngredients.length / ingredients.length) * 100;
+                document.getElementById('progressFill').style.width = progress + '%';
+
+                // Show message
+                showIngredientMessage(ing);
+
+                // Check if complete
+                if (addedIngredients.length === ingredients.length) {
+                    setTimeout(showFinalScreen, 2500);
+                }
+            }, 600);
+        }
+
+        function showIngredientMessage(ing) {
+            const msg = document.createElement('div');
+            msg.className = 'ingredient-message';
+            msg.innerHTML = `
+                <div style="font-size: 2.5rem; margin-bottom: 8px;">${ing.emoji}</div>
+                <div style="font-weight: 600; font-size: 1.2rem; color: #f39c12;">${ing.taste}</div>
+                <div style="font-size: 0.95rem; margin-top: 8px; opacity: 0.95;">${ing.message}</div>
+            `;
+            document.body.appendChild(msg);
+
+            setTimeout(() => msg.remove(), 2000);
+        }
+
+        // Also allow tap/click to add (for easier mobile use)
+        function handlePotTap(e) {
+            const pot = e.currentTarget;
+            const index = parseInt(pot.dataset.index);
+
+            if (addedIngredients.includes(index)) return;
+
+            initAudio();
+            const rect = pot.getBoundingClientRect();
+            addIngredientToPot(index, pot, rect.left + rect.width / 2, rect.top);
+        }
+
+        // ===== FINAL SCREEN =====
+        function showFinalScreen() {
+            playSound('celebration');
+            createConfetti();
+
+            document.getElementById('finalName').textContent = `Dear ${userName},`;
+            document.getElementById('finalMessage').innerHTML = `
+                May this Ugadi bring you <strong>${userBlessing.title} (${userBlessing.kannada})</strong>
+                and the wisdom to embrace all of life's flavors — the sweet joys, bitter challenges,
+                sour lessons, tangy surprises, essential moments, and spicy adventures!
+                <br><br>
+                ಈ ಹೊಸ ವರ್ಷ ನಿಮಗೆ ಸಂತೋಷ ಮತ್ತು ಸಮೃದ್ಧಿ ತರಲಿ! 🙏
+            `;
+
+            showScreen('finalScreen');
+        }
+
+        // ===== SHARING =====
+        function getShareText() {
+            return `🪷 ಯುಗಾದಿ ಹಬ್ಬದ ಶುಭಾಶಯಗಳು! Happy Ugadi 2025! 🎊
+
+Dear ${userName},
+
+May this year bring you ${userBlessing.emoji} ${userBlessing.title} (${userBlessing.kannada}) and the wisdom to embrace all of life's flavors!
+
+ಈ ಹೊಸ ವರ್ಷ ನಿಮಗೆ ಸಂತೋಷ ಮತ್ತು ಸಮೃದ್ಧಿ ತರಲಿ! 🙏`;
+        }
+
+        // ===== EVENT LISTENERS =====
+        document.getElementById('nameInput').addEventListener('input', (e) => {
+            document.getElementById('startBtn').disabled = !e.target.value.trim();
+        });
+
+        document.getElementById('nameInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && e.target.value.trim()) {
+                document.getElementById('startBtn').click();
+            }
+        });
+
+        document.getElementById('startBtn').addEventListener('click', () => {
+            initAudio();
+            playSound('click');
+            userName = document.getElementById('nameInput').value.trim();
+            document.getElementById('wheelGreeting').textContent = `${userName}, let's see what this year holds for you!`;
+            showScreen('wheelScreen');
+            resizeWheel();
+        });
+
+        document.getElementById('spinBtn').addEventListener('click', spinWheel);
+
+        document.getElementById('continueBtn').addEventListener('click', () => {
+            playSound('click');
+            createSmallPots();
+            addedIngredients = [];
+            document.getElementById('potInner').innerHTML = '';
+            document.getElementById('progressFill').style.width = '0%';
+
+            // Add tap listeners
+            document.querySelectorAll('.small-pot').forEach(pot => {
+                pot.addEventListener('click', handlePotTap);
+            });
+
+            showScreen('pachadiScreen');
+        });
+
+        document.getElementById('shareWhatsapp').addEventListener('click', () => {
+            const text = encodeURIComponent(getShareText());
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+        });
+
+        document.getElementById('wishBackBtn').addEventListener('click', () => {
+            const wishMessage = `🪷 ಯುಗಾದಿ ಹಬ್ಬದ ಶುಭಾಶಯಗಳು! Happy Ugadi 2025! 🎊
+
+Dear Prashanth,
+
+Wishing you a wonderful year filled with prosperity, health, and happiness!
+
+May this Ugadi bring all the sweetness of jaggery, the wisdom from life's bitter moments, and the perfect balance of all flavors!
+
+ಈ ಹೊಸ ವರ್ಷ ನಿಮಗೆ ಸಂತೋಷ ಮತ್ತು ಸಮೃದ್ಧಿ ತರಲಿ! 🙏
+
+With love,
+${userName}`;
+            const text = encodeURIComponent(wishMessage);
+            window.open(`https://wa.me/919739864734?text=${text}`, '_blank');
+        });
+
+        document.getElementById('copyLink').addEventListener('click', () => {
+            navigator.clipboard.writeText(getShareText()).then(() => {
+                const btn = document.getElementById('copyLink');
+                const original = btn.innerHTML;
+                btn.innerHTML = '✅ Copied!';
+                setTimeout(() => btn.innerHTML = original, 2000);
+            }).catch(() => {
+                const textarea = document.createElement('textarea');
+                textarea.value = getShareText();
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+
+                const btn = document.getElementById('copyLink');
+                const original = btn.innerHTML;
+                btn.innerHTML = '✅ Copied!';
+                setTimeout(() => btn.innerHTML = original, 2000);
+            });
+        });
+
+        document.getElementById('restartBtn').addEventListener('click', () => {
+            playSound('click');
+            userName = '';
+            userBlessing = null;
+            addedIngredients = [];
+            currentRotation = 0;
+            isSpinning = false;
+            document.getElementById('nameInput').value = '';
+            document.getElementById('startBtn').disabled = true;
+            document.getElementById('spinBtn').disabled = false;
+            document.getElementById('spinInstruction').style.display = 'block';
+            document.getElementById('blessingResult').classList.remove('show');
+            showScreen('welcomeScreen');
+        });
+
+        document.getElementById('soundToggle').addEventListener('click', () => {
+            soundEnabled = !soundEnabled;
+            document.getElementById('soundToggle').textContent = soundEnabled ? '🔊' : '🔇';
+            if (soundEnabled) {
+                initAudio();
+                playSound('click');
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (document.getElementById('wheelScreen').classList.contains('active')) {
+                resizeWheel();
+            }
+        });
+
+        // Initialize
+        drawWheel();
+    </script>
+</body>
+</html>
